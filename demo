@@ -1,16 +1,39 @@
 version: '3.9'
 
 services:
-  java_db:
-    container_name: java_db
-    image: postgres:12
+  app:
+    build: .
     ports:
-      - 5432:5432
+      - "8080:8080"
+    depends_on:
+      - postgres
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-volumes:
-  pgdata: {}
+      - SPRING_PROFILES_ACTIVE=docker
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=mysecretpassword
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://java_db:5432/demo
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+
+
+  postgres:
+    container_name: java_db
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+
+
+
+
+
+  docker compose up -d app
+  docker compose logs
+
+  mvn clean package -DskipTests
+  docker compose build
+
+  docker run --name postgres-container -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres

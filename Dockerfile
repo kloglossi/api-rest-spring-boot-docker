@@ -10,3 +10,5 @@ FROM openjdk:17.0.1-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/biblio-dev-0.0.1-SNAPSHOT.jar .
 CMD ["java", "-jar", "biblio-dev-0.0.1-SNAPSHOT.jar"]
+
+
