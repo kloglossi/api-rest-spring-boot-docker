@@ -16,4 +16,6 @@ public interface IManagePret {
 
     List<Pret> findAll();
 
+    Long countAllByMembreIdAndStatut(Long membreId, String statut);
+
 }

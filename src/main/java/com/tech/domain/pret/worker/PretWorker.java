@@ -44,5 +44,10 @@ public class PretWorker implements PretDomain {
         return pretRepository.findAll();
     }
 
+    @Override
+    public Long countAllByMembreIdAndStatut(Long membreId, String statut) {
+        return pretRepository.countAllByMembreIdAndStatut(membreId, statut);
+    }
+
 
 }
