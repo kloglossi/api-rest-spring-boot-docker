@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PretWorker implements PretDomain {
@@ -42,6 +43,11 @@ public class PretWorker implements PretDomain {
     @Override
     public List<Pret> findAll() {
         return pretRepository.findAll();
+    }
+
+    @Override
+    public Optional<Pret> findById(Long id) {
+        return pretRepository.findById(id);
     }
 
     @Override

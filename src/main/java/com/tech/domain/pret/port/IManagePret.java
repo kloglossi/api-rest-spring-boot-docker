@@ -5,6 +5,7 @@ import com.tech.domain.pret.entity.PretDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface IManagePret {
 
@@ -15,6 +16,8 @@ public interface IManagePret {
     Pret save(Pret pret);
 
     List<Pret> findAll();
+
+    Optional<Pret> findById(Long id);
 
     Long countAllByMembreIdAndStatut(Long membreId, String statut);
 

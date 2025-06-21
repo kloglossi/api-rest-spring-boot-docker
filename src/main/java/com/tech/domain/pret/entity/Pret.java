@@ -16,6 +16,9 @@ public class Pret extends BaseEntity {
 
    private LocalDate datePret;
 
+   private LocalDate dateRetourPrevu;
+
+   //date retour réelle
    private LocalDate dateRetour;
 
    private String statut;

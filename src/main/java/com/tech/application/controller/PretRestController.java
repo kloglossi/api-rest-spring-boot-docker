@@ -14,11 +14,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class PretRestController {
     @Autowired
     MembreDomain membreDomain;
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<OperationResult<Pret>> emprunterLivre(
             @Valid @RequestBody PretDTO pretDTO
     ){
@@ -82,11 +82,73 @@ public class PretRestController {
 
         }
 
+        String dateP = StringHelper.isLocalDate(pretDTO.getDatePret());
+        String dateF = (dateP.equals("")) ? errors.put("datePret","Le format de la date de prêt est incorrecte") : dateP;
+
         if(errors.isEmpty()){
+
+            data = pretDomain.empruter(pretDTO);
 
         }
 
         return new ResponseEntity<>(new OperationResult<>(data,errors), HttpStatus.OK);
     }
+
+    @PutMapping("/{id}/retour")
+    public ResponseEntity<OperationResult<Pret>> retourLivre(
+            @PathVariable String id,
+            @RequestBody PretDTO pretDTO
+    ){
+
+        Pret data = null;
+        HashMap<String, String> errors = new HashMap<>();
+        Long nbreJoursPenalite = 0L;
+        String statutFinal="";
+
+        String ids = StringHelper.isLong(id);
+        Optional<Pret> optionalPret = pretDomain.findById(Long.parseLong(ids));
+
+        if(optionalPret.isEmpty()){
+            errors.put("pret","Le pret est introuvable");
+        }
+
+        if(errors.isEmpty()){
+
+            String dateL = (pretDTO.getDateRetour()==null) ? "" : pretDTO.getDateRetour();
+            String formatDate = StringHelper.isLocalDate(dateL);
+
+            if(formatDate.equals("")){
+                errors.put("dateRetour","La date de retour est incorrecte");
+            }else {
+
+                Pret pret = optionalPret.get();
+                LocalDate dateRetour = LocalDate.parse(dateL, DateTimeFormatter.ofPattern(formatDate));
+                LocalDate datePret = pret.getDatePret();
+                LocalDate penalite = datePret.plusDays(14);
+
+                if(datePret.isAfter(dateRetour)){
+                    errors.put("date","la date retour ne doit pas être inférieur à la date de prêt");
+                }else{
+
+                    if(dateRetour.isAfter(penalite)){
+                        nbreJoursPenalite = ChronoUnit.DAYS.between(dateRetour,penalite);
+                        System.out.println("nb jours penalité : "+nbreJoursPenalite);
+                    }
+
+                }
+
+            }
+
+            if(errors.isEmpty()){
+
+
+
+            }
+
+        }
+
+        return new ResponseEntity<>(new OperationResult<>(data,errors),HttpStatus.OK);
+    }
+
 
 }
