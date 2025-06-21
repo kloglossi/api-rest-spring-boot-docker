@@ -15,4 +15,8 @@ public interface LivreRepository extends JpaRepository<Livre,Long> {
             String auteur, String categorie, boolean disponible
     );
 
+    ArrayList<Livre> findAllByAuteurContainingOrCategorieContainingOrDisponible(
+            String auteur, String categorie, boolean disponible
+    );
+
 }

@@ -14,23 +14,22 @@ public class LivreDTO {
      String id="-1";
 
      @NotBlank(message = "Le champ auteur est requis")
-     @NotEmpty
+     //@NotEmpty(message = "Le champ auteur est requis")
      String auteur;
 
      @NotBlank(message = "Le champ titre est requis")
-     @NotEmpty
+     //@NotEmpty
      String titre;
 
-     boolean disponible=true;
+     String disponible="true";
 
      @NotBlank(message = "Le champ categorie est requis")
-     @NotEmpty
+     //@NotEmpty
      String categorie;
 
      @NotBlank(message = "Le champ isbn est requis")
-     @NotEmpty
+     //@NotEmpty
      @Min(10)
-     @Max(13)
      String isbn;
 
 }

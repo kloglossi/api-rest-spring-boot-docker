@@ -20,4 +20,8 @@ public interface IManageLivre {
 
     ArrayList<Livre> search(String auteur, String categorie, boolean disponible);
 
+    ArrayList<Livre> searchOr(String auteur, String categorie, boolean disponible);
+
+    boolean removeById(Long id);
+
 }

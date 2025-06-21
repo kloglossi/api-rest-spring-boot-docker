@@ -64,4 +64,26 @@ public  class StringHelper {
         return res;
     }
 
+    public static String isBool(String str){
+        String res ="";
+        try{
+            Boolean.parseBoolean(str);
+            res = str;
+        }catch (Exception e){
+            res ="false";
+        }
+        return res;
+    }
+
+    public static boolean isBoolPlus(String str){
+        boolean res = false;
+        try{
+            Boolean.parseBoolean(str);
+            res = true;
+        }catch (Exception e){
+            res =false;
+        }
+        return res;
+    }
+
 }

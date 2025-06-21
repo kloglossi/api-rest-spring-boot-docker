@@ -38,7 +38,7 @@ public class LivreWorker implements LivreDomain {
         Livre livre = Livre.builder()
                 .auteur(livreDTO.getAuteur())
                 .titre(livreDTO.getTitre())
-                .disponible(livreDTO.isDisponible())
+                .disponible(Boolean.parseBoolean(livreDTO.getDisponible()))
                 .categorie(livreDTO.getCategorie())
                 .isbn(livreDTO.getIsbn())
                 .build();
@@ -55,4 +55,23 @@ public class LivreWorker implements LivreDomain {
         return livreRepository.findAllByAuteurContainingAndCategorieContainingAndDisponible(
                 auteur, categorie, disponible);
     }
+
+    @Override
+    public ArrayList<Livre> searchOr(String auteur, String categorie, boolean disponible) {
+        return livreRepository.findAllByAuteurContainingOrCategorieContainingOrDisponible(
+                auteur, categorie, disponible);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        boolean success = false;
+        try {
+            livreRepository.deleteById(id);
+            success = true;
+        }catch (Exception e){
+            success =false;
+        }
+        return success;
+    }
+
 }
