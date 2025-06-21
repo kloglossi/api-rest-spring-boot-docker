@@ -11,6 +11,8 @@ import lombok.Data;
 @Builder
 public class LivreDTO {
 
+     String id="-1";
+
      @NotBlank(message = "Le champ auteur est requis")
      @NotEmpty
      String auteur;

@@ -49,4 +49,10 @@ public class LivreWorker implements LivreDomain {
     public ArrayList<Livre> findAllByIsbnAndIdNot(String isbn, Long id) {
         return livreRepository.findAllByIsbnAndIdNot(isbn, id);
     }
+
+    @Override
+    public ArrayList<Livre> search(String auteur, String categorie, boolean disponible) {
+        return livreRepository.findAllByAuteurContainingAndCategorieContainingAndDisponible(
+                auteur, categorie, disponible);
+    }
 }

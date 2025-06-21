@@ -18,6 +18,6 @@ public interface IManageLivre {
 
     ArrayList<Livre> findAllByIsbnAndIdNot(String isbn, Long id);
 
-    ArrayList<Livre> findAllBy();
+    ArrayList<Livre> search(String auteur, String categorie, boolean disponible);
 
 }
