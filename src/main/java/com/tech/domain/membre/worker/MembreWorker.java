@@ -7,6 +7,7 @@ import com.tech.domain.membre.entity.MembreDto;
 import com.tech.domain.membre.port.MembreDomain;
 import com.tech.infrastructure.local.db.MembreRepository;
 import com.tech.infrastructure.utils.StringHelper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Optional;
 
 
@@ -41,31 +44,38 @@ public class MembreWorker implements MembreDomain {
         return membreRepository.count();
     }
 
+    @Override
+    public boolean findByEmail(String email) {
+        return membreRepository.existsByEmail(email);
+    }
+
 
     @Override
     public Membre save(MembreDto membreDto) {
 
-        String idS =  StringHelper.isLong(membreDto.getId());
-        Membre save = membreRepository.findById(Long.parseLong(idS)).orElse(new Membre());
+        Membre save = new Membre();
         save.setNom(membreDto.getNom());
         save.setEmail(membreDto.getEmail());
-        save.setDateMembership(membreDto.getDateMembership());
-
-        if(save.getId()==-1L){
-            save.setStatut("ENABLED");
-        }else save.setStatut(membreDto.getStatut());
-
+        save.setDateMembership(
+                LocalDate.parse(membreDto.getDateMembership())
+        );
+        save.setStatut("ENABLED");
         return membreRepository.save(save);
 
     }
 
     @Override
-    public Membre create(Membre membre) {
+    public Membre create(@Valid Membre membre) {
         return membreRepository.save(membre);
     }
 
     @Override
     public Optional<Membre> findById(Long id) {
-        return Optional.empty();
+        return membreRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Membre> findByEmailAndIdNot(String email, Long id) {
+        return membreRepository.findByEmailAndIdNot(email, id);
     }
 }

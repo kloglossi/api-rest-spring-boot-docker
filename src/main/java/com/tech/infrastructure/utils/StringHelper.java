@@ -1,5 +1,10 @@
 package com.tech.infrastructure.utils;
 
+
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public  class StringHelper {
 
     public static String isLong(String str){
@@ -32,6 +37,30 @@ public  class StringHelper {
         }catch (Exception e){
             res ="0";
         }
+        return res;
+    }
+
+    public static String isLocalDate(String str){
+        String res ="";
+        boolean success=false;
+
+        try{
+            LocalDate.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            res =str;
+            success=true;
+        }catch (Exception e){
+            res ="";
+        }
+
+        if(!success){
+            try{
+                LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                res =str;
+            }catch (Exception e){
+                res ="";
+            }
+        }
+
         return res;
     }
 

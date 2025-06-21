@@ -1,7 +1,9 @@
 package com.tech.domain.membre.entity;
 
 
+import com.tech.application.config.validator.UniqueEmail;
 import com.tech.domain.entity.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.Table;
@@ -18,44 +20,12 @@ import java.time.LocalDate;
 @Table(name = "membre")
 public class Membre extends BaseEntity {
 
+   private String nom ;
 
-    String nom ;
-    String email ;
-    LocalDate dateMembership = null;
-    String statut;
+   private String email ;
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+   private LocalDate dateMembership = null;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setDateMembership(LocalDate dateMembership) {
-        this.dateMembership = dateMembership;
-    }
-
-    public void setStatut(String statut) {
-        this.statut = statut;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public LocalDate getDateMembership() {
-        return dateMembership;
-    }
-
-    public String getStatut() {
-        return statut;
-    }
-
-
+   private String statut;
 
 }

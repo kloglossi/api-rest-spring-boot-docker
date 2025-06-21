@@ -17,11 +17,14 @@ public interface IManageMembre {
 
    Long count();
 
+  boolean findByEmail(String email);
 
   Membre save(MembreDto membreDto);
 
   Membre create(Membre membre);
 
   Optional<Membre> findById(Long id);
+
+  Optional<Membre> findByEmailAndIdNot(String email, Long id);
 
 }
