@@ -6,6 +6,7 @@ import com.tech.domain.membre.entity.Membre;
 import com.tech.domain.membre.entity.MembreDto;
 import com.tech.domain.membre.port.MembreDomain;
 import com.tech.infrastructure.local.db.MembreRepository;
+import com.tech.infrastructure.utils.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +31,7 @@ public class MembreWorker implements MembreDomain {
         String sortD = pagea.getSortDir();
 
         Sort sort = sortD.equals(Sort.Direction.ASC.name()) ? Sort.by(pagea.getSortField()).ascending() : Sort.by(pagea.getSortField()).descending();
-        Pageable pageable = PageRequest.of(pagea.getPageNo() - 1, pagea.getPageSize(), sort);
+        Pageable pageable = PageRequest.of(pagea.getPageNo() - 1, pagea.getItemsByPage(), sort);
         return membreRepository.findAll(pageable);
 
     }
@@ -41,18 +42,26 @@ public class MembreWorker implements MembreDomain {
     }
 
 
-
     @Override
     public Membre save(MembreDto membreDto) {
 
-        Membre save = new Membre();
-
+        String idS =  StringHelper.isLong(membreDto.getId());
+        Membre save = membreRepository.findById(Long.parseLong(idS)).orElse(new Membre());
         save.setNom(membreDto.getNom());
         save.setEmail(membreDto.getEmail());
         save.setDateMembership(membreDto.getDateMembership());
-        save.setStatut(membreDto.getStatut());
+
+        if(save.getId()==-1L){
+            save.setStatut("ENABLED");
+        }else save.setStatut(membreDto.getStatut());
 
         return membreRepository.save(save);
+
+    }
+
+    @Override
+    public Membre create(Membre membre) {
+        return membreRepository.save(membre);
     }
 
     @Override

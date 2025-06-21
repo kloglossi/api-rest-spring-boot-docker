@@ -21,6 +21,6 @@ public class Livre extends BaseEntity {
     private String titre;
     private boolean disponible;
     private String categorie;
-    private boolean isBn;
+    private String isbn;
 
 }

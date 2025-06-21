@@ -20,6 +20,8 @@ public interface IManageMembre {
 
   Membre save(MembreDto membreDto);
 
+  Membre create(Membre membre);
+
   Optional<Membre> findById(Long id);
 
 }

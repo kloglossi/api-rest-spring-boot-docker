@@ -1,8 +1,8 @@
 package com.tech.infrastructure.utils;
 
-public class StringHelper {
+public  class StringHelper {
 
-    public String isLong(String str){
+    public static String isLong(String str){
         String res ="";
         try{
             Long.parseLong(str);

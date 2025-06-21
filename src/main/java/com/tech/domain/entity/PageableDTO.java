@@ -1,5 +1,7 @@
 package com.tech.domain.entity;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Setter()
@@ -7,17 +9,17 @@ import lombok.*;
 @Data()
 public class PageableDTO {
 
-    //@NotEmpty
+    @Min(1)
     int pageNo;
+
+    @Min(1)
     int itemsByPage;
 
-    //@NotEmpty
+    @NotEmpty
     String sortDir;
 
-    //@NotEmpty
+    @NotEmpty
     String sortField="id";
-
-    int pageSize;
 
 
 }
