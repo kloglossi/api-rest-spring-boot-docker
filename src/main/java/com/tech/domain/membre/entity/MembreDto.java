@@ -19,7 +19,7 @@ public class MembreDto {
     String id= "-1L";
 
     @NotBlank(message = "Le champ nom est requis")
-    @NotEmpty
+    //@NotEmpty
     String nom ;
 
     @NotEmpty

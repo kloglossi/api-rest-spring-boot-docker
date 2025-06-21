@@ -18,7 +18,6 @@ public class LivreDTO {
      String auteur;
 
      @NotBlank(message = "Le champ titre est requis")
-     //@NotEmpty
      String titre;
 
      String disponible="true";

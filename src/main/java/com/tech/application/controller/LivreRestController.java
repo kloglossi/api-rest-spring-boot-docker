@@ -106,7 +106,9 @@ public class LivreRestController {
             }
 
             if(!isbn.isEmpty()){
-                livre.setIsbn(livreDTO.getIsbn());
+                if(isbn.length()<10){
+                    errors.put("isbn","L'isbn doit être supérieur à 9 caractères");
+                }else livre.setIsbn(livreDTO.getIsbn());
             }
 
             if(errors.isEmpty()){
