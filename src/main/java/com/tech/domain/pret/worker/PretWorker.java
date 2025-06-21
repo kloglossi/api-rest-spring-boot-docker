@@ -1,12 +1,15 @@
 package com.tech.domain.pret.worker;
 
 import com.tech.domain.pret.entity.Pret;
+import com.tech.domain.pret.entity.PretDTO;
 import com.tech.domain.pret.port.PretDomain;
 import com.tech.infrastructure.local.db.PretRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PretWorker implements PretDomain {
@@ -16,17 +19,29 @@ public class PretWorker implements PretDomain {
 
     @Override
     public Long count() {
-        return null;
+        return pretRepository.count();
     }
 
     @Override
-    public Pret empruter(Long membreId, Long livre) {
-        return null;
+    public Pret empruter(PretDTO pretDTO) {
+        Pret pret = Pret.builder()
+                .datePret(LocalDate.parse(pretDTO.getDatePret()))
+                .dateRetour(LocalDate.parse(pretDTO.getDateRetour()))
+                .membreId(Long.parseLong(pretDTO.getMembreId()))
+                .livreId(Long.parseLong(pretDTO.getLivreId()))
+                .statut("ENABLED")
+                .build();
+        return pretRepository.save(pret);
     }
 
     @Override
-    public ArrayList<Pret> findAll() {
-        return null;
+    public Pret save(Pret pret) {
+        return pretRepository.save(pret);
+    }
+
+    @Override
+    public List<Pret> findAll() {
+        return pretRepository.findAll();
     }
 
 
