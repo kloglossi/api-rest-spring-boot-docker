@@ -23,8 +23,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.tech.domain.entity.StateData.BORROW;
-import static com.tech.domain.entity.StateData.ENABLED;
+import static com.tech.domain.entity.StateData.*;
 
 @RestController
 @RequestMapping("/api/prets")
@@ -112,10 +111,10 @@ public class PretRestController {
             errors.put("pret","Le pret est introuvable");
         }
 
-        if(errors.isEmpty()){
+        String dateL = (pretDTO.getDateRetour()==null) ? "" : pretDTO.getDateRetour();
+        String formatDate = StringHelper.isLocalDate(dateL);
 
-            String dateL = (pretDTO.getDateRetour()==null) ? "" : pretDTO.getDateRetour();
-            String formatDate = StringHelper.isLocalDate(dateL);
+        if(errors.isEmpty()){
 
             if(formatDate.equals("")){
                 errors.put("dateRetour","La date de retour est incorrecte");
@@ -130,9 +129,13 @@ public class PretRestController {
                     errors.put("date","la date retour ne doit pas être inférieur à la date de prêt");
                 }else{
 
+                    nbreJoursPenalite = ChronoUnit.DAYS.between(dateRetour,penalite);
+                    System.out.println("nb jours penalité : "+nbreJoursPenalite);
+
                     if(dateRetour.isAfter(penalite)){
-                        nbreJoursPenalite = ChronoUnit.DAYS.between(dateRetour,penalite);
-                        System.out.println("nb jours penalité : "+nbreJoursPenalite);
+                        statutFinal = LATE_DELIVERY;
+                    }else {
+                        statutFinal =RETURNED;
                     }
 
                 }
@@ -141,7 +144,10 @@ public class PretRestController {
 
             if(errors.isEmpty()){
 
-
+                Pret pret = optionalPret.get();
+                pret.setDateRetour(LocalDate.parse(dateL,DateTimeFormatter.ofPattern(formatDate)));
+                pret.setStatut(statutFinal);
+                data = pretDomain.save(pret);
 
             }
 
