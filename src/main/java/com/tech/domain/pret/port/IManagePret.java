@@ -3,7 +3,6 @@ package com.tech.domain.pret.port;
 import com.tech.domain.pret.entity.Pret;
 import com.tech.domain.pret.entity.PretDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +28,9 @@ public interface IManagePret {
     List<Pret> findAllByStatutAndDateRetourIsNull(String statut);
 
     List<Pret> findAllByStatutAndDateRetourIsNotNull(String statut);
+
+    List<Pret> findAllById(Long id);
+
+    List<Pret> findAllByMembreId(Long membreId);
 
 }

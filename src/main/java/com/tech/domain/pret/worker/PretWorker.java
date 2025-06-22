@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.tech.domain.entity.StateData.BORROW;
-import static com.tech.domain.entity.StateData.ENABLED;
 
 @Service
 public class PretWorker implements PretDomain {
@@ -30,7 +28,6 @@ public class PretWorker implements PretDomain {
     public Pret empruter(PretDTO pretDTO) {
         Pret pret = Pret.builder()
                 .datePret(LocalDate.parse(pretDTO.getDatePret()))
-                //.dateRetour(LocalDate.parse(pretDTO.getDateRetour()))
                 .membreId(Long.parseLong(pretDTO.getMembreId()))
                 .livreId(Long.parseLong(pretDTO.getLivreId()))
                 .statut(BORROW)
@@ -72,6 +69,16 @@ public class PretWorker implements PretDomain {
     @Override
     public List<Pret> findAllByStatutAndDateRetourIsNotNull(String statut) {
         return pretRepository.findAllByStatutAndDateRetourIsNotNull(statut);
+    }
+
+    @Override
+    public List<Pret> findAllById(Long id) {
+        return pretRepository.findAllById(id);
+    }
+
+    @Override
+    public List<Pret> findAllByMembreId(Long membreId) {
+        return pretRepository.findAllByMembreId(membreId);
     }
 
 

@@ -5,6 +5,8 @@ import com.tech.domain.entity.PageableDTO;
 import com.tech.domain.membre.entity.Membre;
 import com.tech.domain.membre.entity.MembreDto;
 import com.tech.domain.membre.port.MembreDomain;
+import com.tech.domain.pret.entity.Pret;
+import com.tech.domain.pret.port.PretDomain;
 import com.tech.infrastructure.utils.OperationResult;
 import com.tech.infrastructure.utils.StringHelper;
 import jakarta.validation.Valid;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +28,9 @@ public class MembreRestController {
 
     @Autowired
     private MembreDomain membreDomain;
+
+    @Autowired
+    private PretDomain pretDomain;
 
     @GetMapping("")
     public ResponseEntity<Page<Membre>> listeMembres(@Valid @RequestBody PageableDTO pageableDto) {
@@ -111,6 +117,28 @@ public class MembreRestController {
         }
 
         return new ResponseEntity<>(new OperationResult<>(data, errors), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/prets")
+    public ResponseEntity<OperationResult<List<Pret>>> historiquePret(
+            @PathVariable String id
+    ){
+
+        List<Pret> data =null;
+        HashMap<String, String> errors = new HashMap<>();
+
+        String idS = StringHelper.isLong(id);
+        List<Pret> list = pretDomain.findAllByMembreId(Long.parseLong(idS));
+
+        if(list.isEmpty()){
+            errors.put("membre","Cet membre n'a effectué aucun emprunt de livre");
+        }
+
+        if(errors.isEmpty()){
+            data = list;
+        }
+
+        return new ResponseEntity<>(new OperationResult<>(data,errors),HttpStatus.OK);
     }
 
 }

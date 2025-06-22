@@ -194,7 +194,7 @@ public class PretRestController {
 
     @GetMapping("/en-retard")
     public ResponseEntity<List<Pret>> listePretsEnRetard(){
-        List<Pret> list = pretDomain.findAllByStatutAndDateRetourIsNotNull(BORROW);
+        List<Pret> list = pretDomain.findAllByStatutAndDateRetourIsNotNull(LATE_DELIVERY);
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
