@@ -81,7 +81,7 @@ public class PretRestController {
            }
 
            if (countPret>=3){
-               errors.put("pret","Malheureusement vous avez déjà trois emprunts actifs, nous ne pouvez pas emprunter de livre");
+               errors.put("pret","Malheureusement vous avez déjà trois emprunts actifs, vous ne pouvez plus emprunter de livre");
            }
 
         }
@@ -155,10 +155,12 @@ public class PretRestController {
 
                 if (data.getId()!=-1L && nbreJoursPenalite>0){
 
+                    double cout = 500.0;
                     Amende amende = Amende.builder()
                             .pretId(data.getId())
-                            .coutParJour(500)
+                            .coutParJour(cout)
                             .nombreJoursRetard(nbreJoursPenalite.intValue())
+                            .coutTotal(nbreJoursPenalite.doubleValue()*cout)
                             .build();
                     amendeDomain.save(amende);
                 }

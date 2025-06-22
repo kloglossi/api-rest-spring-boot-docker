@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.tech.domain.entity.StateData.BORROW;
 import static com.tech.domain.entity.StateData.ENABLED;
 
 @Service
@@ -32,7 +33,7 @@ public class PretWorker implements PretDomain {
                 //.dateRetour(LocalDate.parse(pretDTO.getDateRetour()))
                 .membreId(Long.parseLong(pretDTO.getMembreId()))
                 .livreId(Long.parseLong(pretDTO.getLivreId()))
-                .statut(ENABLED)
+                .statut(BORROW)
                 .build();
         return pretRepository.save(pret);
     }

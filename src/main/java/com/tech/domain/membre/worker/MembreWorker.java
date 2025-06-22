@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Optional;
 
+import static com.tech.domain.entity.StateData.ENABLED;
+
 
 @Service
 public class MembreWorker implements MembreDomain {
@@ -59,7 +61,7 @@ public class MembreWorker implements MembreDomain {
         save.setDateMembership(
                 LocalDate.parse(membreDto.getDateMembership())
         );
-        save.setStatut("ENABLED");
+        save.setStatut(ENABLED);
         return membreRepository.save(save);
 
     }
