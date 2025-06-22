@@ -40,15 +40,19 @@ public class StatistiqueRestController {
         Long livresIndis = livreDomain.countAllByDisponible(false);
         Long pretsActifs = pretDomain.countAllByStatutAndDateRetourIsNull(BORROW);
         Long pretsRetards = pretDomain.countAllByStatutAndDateRetourIsNotNull(LATE_DELIVERY);
+        Long retourPretsNormal = pretDomain.countAllByStatutAndDateRetourIsNotNull(RETURNED);
         Long totalMembres = membreDomain.count();
         Long totalMembresActif = membreDomain.countAllByStatut(ENABLED);
         Long totalMembresInactif = membreDomain.countAllByStatut(DISABLED);
+        Long totalPrets = pretDomain.count();
 
         data.put("total-livres",totalLivre.toString());
         data.put("livres-disponible",livresDis.toString());
         data.put("livres-indisponible",livresIndis.toString());
+        data.put("total-prets",totalPrets.toString());
         data.put("prets-actifs",pretsActifs.toString());
         data.put("prets-retards",pretsRetards.toString());
+        data.put("retour-prets-normal",retourPretsNormal.toString());
         data.put("total-membres",totalMembres.toString());
         data.put("total-membres-actifs",totalMembresActif.toString());
         data.put("total-membres-inactifs",totalMembresInactif.toString());

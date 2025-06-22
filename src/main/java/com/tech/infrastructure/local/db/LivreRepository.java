@@ -21,4 +21,8 @@ public interface LivreRepository extends JpaRepository<Livre,Long> {
 
     Long countAllByDisponible(boolean disponible);
 
+    boolean existsByAuteur(String auteur);
+
+    boolean existsByIsbn(String isbn);
+
 }
