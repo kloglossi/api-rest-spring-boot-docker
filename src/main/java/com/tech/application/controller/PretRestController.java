@@ -79,10 +79,12 @@ public class PretRestController {
 
            if(!Objects.equals(membre.getStatut(), ENABLED)){
                errors.put("membre","Le membre n'est pas actif, pour qu'il le soit il faut que son statut soit égale à ENABLED");
-           }
+           }else{
 
-           if (countPret>=3){
-               errors.put("pret","Malheureusement vous avez déjà trois emprunts actifs, vous ne pouvez plus emprunter de livre");
+               if (countPret>=3){
+                   errors.put("pret","Malheureusement vous avez déjà trois emprunts actifs, vous ne pouvez plus emprunter de livre");
+               }
+
            }
 
         }
@@ -181,6 +183,19 @@ public class PretRestController {
         }
 
         return new ResponseEntity<>(new OperationResult<>(data,errors),HttpStatus.OK);
+    }
+
+
+    @GetMapping("/actifs")
+    public ResponseEntity<List<Pret>> listePretsActifs(){
+        List<Pret> pretListActifs = pretDomain.findAllByStatutAndDateRetourIsNull(BORROW);
+        return new ResponseEntity<>(pretListActifs,HttpStatus.OK);
+    }
+
+    @GetMapping("/en-retard")
+    public ResponseEntity<List<Pret>> listePretsEnRetard(){
+        List<Pret> list = pretDomain.findAllByStatutAndDateRetourIsNotNull(BORROW);
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
 

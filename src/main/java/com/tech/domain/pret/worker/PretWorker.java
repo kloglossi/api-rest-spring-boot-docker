@@ -64,5 +64,15 @@ public class PretWorker implements PretDomain {
         return pretRepository.countAllByMembreIdAndStatut(membreId, statut);
     }
 
+    @Override
+    public List<Pret> findAllByStatutAndDateRetourIsNull(String statut) {
+        return pretRepository.findAllByStatutAndDateRetourIsNull(statut);
+    }
+
+    @Override
+    public List<Pret> findAllByStatutAndDateRetourIsNotNull(String statut) {
+        return pretRepository.findAllByStatutAndDateRetourIsNotNull(statut);
+    }
+
 
 }

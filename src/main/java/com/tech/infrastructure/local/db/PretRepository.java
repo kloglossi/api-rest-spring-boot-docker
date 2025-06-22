@@ -16,5 +16,8 @@ public interface PretRepository extends JpaRepository<Pret,Long> {
     );
 
 
+    List<Pret> findAllByStatutAndDateRetourIsNull(String statut);
+
+    List<Pret> findAllByStatutAndDateRetourIsNotNull(String statut);
 
 }
