@@ -27,4 +27,6 @@ public interface IManageMembre {
 
   Optional<Membre> findByEmailAndIdNot(String email, Long id);
 
+    Long countAllByStatut(String statut);
+
 }

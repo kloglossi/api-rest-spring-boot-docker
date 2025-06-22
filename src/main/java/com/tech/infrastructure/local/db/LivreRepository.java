@@ -19,4 +19,6 @@ public interface LivreRepository extends JpaRepository<Livre,Long> {
             String auteur, String categorie, boolean disponible
     );
 
+    Long countAllByDisponible(boolean disponible);
+
 }

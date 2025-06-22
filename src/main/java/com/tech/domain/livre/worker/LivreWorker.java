@@ -74,4 +74,9 @@ public class LivreWorker implements LivreDomain {
         return success;
     }
 
+    @Override
+    public Long countAllByDisponible(boolean disponible) {
+        return livreRepository.countAllByDisponible(disponible);
+    }
+
 }

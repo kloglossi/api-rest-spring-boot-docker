@@ -14,4 +14,5 @@ public interface MembreRepository extends JpaRepository<Membre,Long> {
 
     Optional<Membre> findByEmailAndIdNot(String email, Long id);
 
+    Long countAllByStatut(String statut);
 }

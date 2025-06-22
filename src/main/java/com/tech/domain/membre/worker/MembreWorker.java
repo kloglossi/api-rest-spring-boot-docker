@@ -80,4 +80,9 @@ public class MembreWorker implements MembreDomain {
     public Optional<Membre> findByEmailAndIdNot(String email, Long id) {
         return membreRepository.findByEmailAndIdNot(email, id);
     }
+
+    @Override
+    public Long countAllByStatut(String statut) {
+        return membreRepository.countAllByStatut(statut);
+    }
 }

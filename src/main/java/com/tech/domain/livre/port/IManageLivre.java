@@ -24,4 +24,6 @@ public interface IManageLivre {
 
     boolean removeById(Long id);
 
+    Long countAllByDisponible(boolean disponible);
+
 }
