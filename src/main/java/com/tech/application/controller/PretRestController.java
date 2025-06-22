@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -114,6 +115,16 @@ public class PretRestController {
 
         if(optionalPret.isEmpty()){
             errors.put("pret","Le pret est introuvable");
+        }else {
+
+            List<Pret> dejaTraite = pretDomain.findAllByIdAndStatutIsNotAndDateRetourIsNotNull(
+                    Long.parseLong(ids),BORROW
+            );
+
+            if(!dejaTraite.isEmpty()){
+                errors.put("pret","Le livre a déjà été retourné");
+            }
+
         }
 
         String dateL = (pretDTO.getDateRetour()==null) ? "" : pretDTO.getDateRetour();

@@ -19,6 +19,10 @@ public interface IManagePret {
 
     Optional<Pret> findById(Long id);
 
+    List<Pret> findAllByIdAndStatutIsNotAndDateRetourIsNotNull(
+            Long id, String statut
+    );
+
     Long countAllByMembreIdAndStatut(Long membreId, String statut);
 
 }
