@@ -22,13 +22,12 @@ public class MembreDto {
     //@NotEmpty
     String nom ;
 
-    @NotEmpty
+
     @Email(message = "Email invalide")
     String email ;
 
     //@NotBlank(message = "Le champ date d'adhésion est requis")
-    @NotEmpty
-    @NotBlank(message = "Le champ date d'adhésion est requise au format yyyy-MM-dd")
+    @NotBlank(message = "Le champ date d'adhésion est incorrecte")
     String dateMembership;
 
     String statut;

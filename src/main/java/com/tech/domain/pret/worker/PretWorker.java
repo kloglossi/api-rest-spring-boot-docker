@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.tech.domain.entity.StateData.ENABLED;
+
 @Service
 public class PretWorker implements PretDomain {
 
@@ -27,10 +29,10 @@ public class PretWorker implements PretDomain {
     public Pret empruter(PretDTO pretDTO) {
         Pret pret = Pret.builder()
                 .datePret(LocalDate.parse(pretDTO.getDatePret()))
-                .dateRetour(LocalDate.parse(pretDTO.getDateRetour()))
+                //.dateRetour(LocalDate.parse(pretDTO.getDateRetour()))
                 .membreId(Long.parseLong(pretDTO.getMembreId()))
                 .livreId(Long.parseLong(pretDTO.getLivreId()))
-                .statut("ENABLED")
+                .statut(ENABLED)
                 .build();
         return pretRepository.save(pret);
     }

@@ -13,12 +13,10 @@ public class PretDTO {
 
     String id= "-1L";
 
-    @NotEmpty
-    @NotBlank(message = "Le champ date de pret est requise au format yyyy-MM-dd")
+    @NotBlank(message = "La date de pret est requise")
     private String datePret;
 
-    @NotEmpty
-    @NotBlank(message = "Le champ date de retour est requise au format yyyy-MM-dd")
+    //@NotBlank(message = "Le champ date de retour est requise au format yyyy-MM-dd")
     private String dateRetour;
 
     private String statut;
@@ -26,7 +24,7 @@ public class PretDTO {
     @NotBlank(message = "Le livre  est requis")
     private String livreId;
 
-    @NotBlank(message = "Le livre  est requis")
+    @NotBlank(message = "Le membre  est requis")
     private String membreId;
 
 }
