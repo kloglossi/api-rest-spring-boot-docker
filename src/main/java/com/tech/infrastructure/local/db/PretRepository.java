@@ -34,4 +34,6 @@ public interface PretRepository extends JpaRepository<Pret,Long> {
             Long membreId, Long livreId, String statut
     );
 
+    Long countAllByLivreId(Long livreId);
+
 }

@@ -26,4 +26,6 @@ public interface IManageLivre {
 
     Long countAllByDisponible(boolean disponible);
 
+
+
 }

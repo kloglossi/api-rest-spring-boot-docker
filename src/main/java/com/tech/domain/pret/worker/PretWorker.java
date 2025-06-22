@@ -101,5 +101,10 @@ public class PretWorker implements PretDomain {
         return pretRepository.countAllByStatutAndDateRetourIsNull(statut);
     }
 
+    @Override
+    public Long countAllByLivreId(Long livreId) {
+        return pretRepository.countAllByLivreId(livreId);
+    }
+
 
 }

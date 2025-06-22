@@ -43,4 +43,6 @@ public interface IManagePret {
 
     Long countAllByStatutAndDateRetourIsNull(String statut);
 
+    Long countAllByLivreId(Long livreId);
+
 }

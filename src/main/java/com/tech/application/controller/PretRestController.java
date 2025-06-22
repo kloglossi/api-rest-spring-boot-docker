@@ -94,6 +94,9 @@ public class PretRestController {
             Livre livre = optionalLivre.get();
             List<Pret> optPretActif = pretDomain.findAllByMembreIdAndLivreIdAndStatut(membre.getId(), livre.getId(),BORROW);
 
+            LocalDate dateM = membre.getDateMembership();
+
+
             if(!optPretActif.isEmpty()){
                 errors.put("pret","Vous avez déjà un prêt actif associé à cet livre");
             }

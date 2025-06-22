@@ -4,6 +4,7 @@ import com.tech.domain.livre.entity.Livre;
 import com.tech.domain.livre.entity.LivreDTO;
 import com.tech.domain.livre.port.LivreDomain;
 
+import com.tech.domain.pret.port.PretDomain;
 import com.tech.infrastructure.utils.OperationResult;
 import com.tech.infrastructure.utils.StringHelper;
 import jakarta.validation.Valid;
@@ -23,6 +24,9 @@ public class LivreRestController {
 
     @Autowired
     private LivreDomain livreDomain;
+
+    @Autowired
+    private PretDomain pretDomain;
 
     @GetMapping("")
     public ResponseEntity<List<Livre>> listeLivres (
@@ -157,8 +161,18 @@ public class LivreRestController {
         String idS = StringHelper.isLong(id);
         Optional<Livre> opt = livreDomain.findById(Long.parseLong(idS));
 
+
+
         if(opt.isEmpty()){
             errors.put("livre","Le livre est introuvale");
+        }else {
+
+            Long countLiv = pretDomain.countAllByLivreId(Long.parseLong(idS));
+
+            if(countLiv>0){
+                errors.put("livre","vous ne pouvez pas supprimer un livre qui a été prêté au moins une fois");
+            }
+
         }
 
         if(errors.isEmpty()){
