@@ -2,6 +2,7 @@ package com.tech.domain.amende.enity;
 
 import com.tech.domain.entity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -10,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "amende")
 public class Amende extends BaseEntity {
 
     private Long pretId;

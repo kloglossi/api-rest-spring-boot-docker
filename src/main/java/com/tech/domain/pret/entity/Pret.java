@@ -2,6 +2,7 @@ package com.tech.domain.pret.entity;
 
 import com.tech.domain.entity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
+@Table(name = "pret")
 public class Pret extends BaseEntity {
 
    private LocalDate datePret;

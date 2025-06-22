@@ -35,7 +35,7 @@ public class MembreWorker implements MembreDomain {
 
         String sortD = pagea.getSortDir();
 
-        Sort sort = sortD.equals(Sort.Direction.ASC.name()) ? Sort.by(pagea.getSortField()).ascending() : Sort.by(pagea.getSortField()).descending();
+        Sort sort = sortD.equals(Sort.Direction.ASC.name()) ? Sort.by("id").ascending() : Sort.by("id").descending();
         Pageable pageable = PageRequest.of(pagea.getPageNo() - 1, pagea.getItemsByPage(), sort);
         return membreRepository.findAll(pageable);
 

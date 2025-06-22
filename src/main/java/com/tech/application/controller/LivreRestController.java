@@ -54,6 +54,10 @@ public class LivreRestController {
             errors.put("isbn","L'isbn du livre a déjà été utilisé");
         }
 
+        if(isbn.length()<10){
+            errors.put("isbn","L'isbn du livre doit être supérieur à 9 caractères");
+        }
+
         if(errors.isEmpty()){
             data = livreDomain.create(livreDTO);
         }

@@ -26,9 +26,8 @@ public class LivreDTO {
      //@NotEmpty
      String categorie;
 
-     @NotBlank(message = "Le champ isbn est requis")
+     @NotBlank(message = "Le champ isbn est requis, il doit être supérieur à 9 caractères")
      //@NotEmpty
-     @Min(10)
      String isbn;
 
 }

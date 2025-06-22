@@ -22,7 +22,7 @@ public class MembreDto {
     //@NotEmpty
     String nom ;
 
-
+    @NotBlank(message = "L'email est requis")
     @Email(message = "Email invalide")
     String email ;
 

@@ -18,8 +18,4 @@ public class PageableDTO {
     @NotEmpty
     String sortDir;
 
-    @NotEmpty
-    String sortField="id";
-
-
 }
