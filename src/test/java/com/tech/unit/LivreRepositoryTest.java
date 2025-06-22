@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -27,13 +29,18 @@ public class LivreRepositoryTest {
     void verifierSiLeLivreExistParAuteur(){
         String auteur="Ben carlos";
 
+        int min = 10000;
+        int max = 100000;
+        int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
+        String isbn ="99400049"+randomNumber;
+
         //données
         Livre livre = Livre.builder()
                 .titre("Le vent")
                 .auteur(auteur)
                 .categorie("nature")
                 .disponible(true)
-                .isbn("3423565434")
+                .isbn(isbn)
                 .build();
         livreRepository.save(livre);
 
@@ -48,6 +55,11 @@ public class LivreRepositoryTest {
     @Test
     void verifierSiLaCategorieDuLivreEst(){
 
+        int min = 10000;
+        int max = 400000;
+        int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
+        String isbn ="95450999"+randomNumber;
+
         String categorie="science";
         //donnée
         Livre livre = Livre.builder()
@@ -55,7 +67,7 @@ public class LivreRepositoryTest {
                 .auteur("Luis mendez")
                 .categorie(categorie)
                 .disponible(true)
-                .isbn("3423561424")
+                .isbn(isbn)
                 .build();
         Livre lv = livreRepository.save(livre);
 
@@ -69,7 +81,11 @@ public class LivreRepositoryTest {
 
     @Test
     void verifierSiLeLivreExistParIsbn(){
-        String isbn="9345245678";
+
+        int min = 10000;
+        int max = 800000;
+        int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
+        String isbn ="90410999"+randomNumber;
 
         //données
         Livre livre = Livre.builder()
@@ -86,6 +102,20 @@ public class LivreRepositoryTest {
 
         //Alors
         assertThat(res).isTrue();
+
+    }
+
+    @Test
+    void rechercheUnLivreInexitantParId(){
+
+        //donnée
+        Long id =-1L;
+
+        //Quand
+        Optional<Livre> lv = livreRepository.findById(id);
+
+        //Alors
+        assertThat(lv).isEmpty();
 
     }
 

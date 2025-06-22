@@ -44,7 +44,7 @@ public class MembreControllerIntegrationTest {
     }
 
     @Test
-    public void testRecupererListeLivre() throws Exception {
+    public void testRecupererListeMembre() throws Exception {
 
         String pageNo ="1";
         String itemsByPage="5";
@@ -52,8 +52,7 @@ public class MembreControllerIntegrationTest {
 
         String livreJson = String.format("{\"pageNo\":\"%s\",\"itemsByPage\":\"%s\",\"sortDir\":\"%s\"}",pageNo,itemsByPage,sortDir);
 
-
-        mockMvc.perform(get("/api/livres")
+        mockMvc.perform(get("/api/membres")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(livreJson)
                 )
