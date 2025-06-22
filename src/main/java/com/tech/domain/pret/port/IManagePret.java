@@ -33,4 +33,10 @@ public interface IManagePret {
 
     List<Pret> findAllByMembreId(Long membreId);
 
+    List<Pret> findAllByMembreIdAndLivreId(Long membreId, Long livreId);
+
+    List<Pret> findAllByMembreIdAndLivreIdAndStatut(
+            Long membreId, Long livreId, String statut
+    );
+
 }

@@ -89,6 +89,17 @@ public class PretRestController {
 
         }
 
+        if(optionalLivre.isPresent() && optlMembre.isPresent()){
+            Membre membre = optlMembre.get();
+            Livre livre = optionalLivre.get();
+            List<Pret> optPretActif = pretDomain.findAllByMembreIdAndLivreIdAndStatut(membre.getId(), livre.getId(),BORROW);
+
+            if(!optPretActif.isEmpty()){
+                errors.put("pret","Vous avez déjà un prêt actif associé à cet livre");
+            }
+
+        }
+
         String dateP = StringHelper.isLocalDate(pretDTO.getDatePret());
         String dateF = (dateP.equals("")) ? errors.put("datePret","Le format de la date de prêt est incorrecte") : dateP;
 

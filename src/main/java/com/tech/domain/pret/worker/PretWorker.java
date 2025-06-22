@@ -81,5 +81,15 @@ public class PretWorker implements PretDomain {
         return pretRepository.findAllByMembreId(membreId);
     }
 
+    @Override
+    public List<Pret> findAllByMembreIdAndLivreId(Long membreId, Long livreId) {
+        return pretRepository.findAllByMembreIdAndLivreId(membreId, livreId);
+    }
+
+    @Override
+    public List<Pret> findAllByMembreIdAndLivreIdAndStatut(Long membreId, Long livreId, String statut) {
+        return pretRepository.findAllByMembreIdAndLivreIdAndStatut(membreId, livreId, statut);
+    }
+
 
 }

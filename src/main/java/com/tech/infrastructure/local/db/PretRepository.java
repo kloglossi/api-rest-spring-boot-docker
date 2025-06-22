@@ -24,4 +24,10 @@ public interface PretRepository extends JpaRepository<Pret,Long> {
 
     List<Pret> findAllByMembreId(Long membreId);
 
+    List<Pret> findAllByMembreIdAndLivreId(Long membreId, Long livreId);
+
+    List<Pret> findAllByMembreIdAndLivreIdAndStatut(
+            Long membreId, Long livreId, String statut
+    );
+
 }
