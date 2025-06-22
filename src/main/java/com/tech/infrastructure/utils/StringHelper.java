@@ -46,7 +46,7 @@ public  class StringHelper {
 
         try{
             LocalDate.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            res =str;
+            res ="yyyy-MM-dd";
             success=true;
         }catch (Exception e){
             res ="";
@@ -55,7 +55,7 @@ public  class StringHelper {
         if(!success){
             try{
                 LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                res =str;
+                res ="dd-MM-yyyy";
             }catch (Exception e){
                 res ="";
             }

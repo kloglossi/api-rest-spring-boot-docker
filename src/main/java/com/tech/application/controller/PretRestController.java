@@ -1,5 +1,7 @@
 package com.tech.application.controller;
 
+import com.tech.domain.amende.enity.Amende;
+import com.tech.domain.amende.port.AmendeDomain;
 import com.tech.domain.entity.StateData;
 import com.tech.domain.livre.entity.Livre;
 import com.tech.domain.livre.port.LivreDomain;
@@ -37,6 +39,9 @@ public class PretRestController {
 
     @Autowired
     MembreDomain membreDomain;
+
+    @Autowired
+    AmendeDomain amendeDomain;
 
     @PostMapping("")
     public ResponseEntity<OperationResult<Pret>> emprunterLivre(
@@ -125,15 +130,14 @@ public class PretRestController {
                 LocalDate datePret = pret.getDatePret();
                 LocalDate penalite = datePret.plusDays(14);
 
-                if(datePret.isAfter(dateRetour)){
-                    errors.put("date","la date retour ne doit pas être inférieur à la date de prêt");
+                if(datePret.isAfter(dateRetour) || datePret.isEqual(dateRetour)){
+                    errors.put("date","la date retour ne doit pas être inférieur ou égale à la date de prêt");
                 }else{
-
-                    nbreJoursPenalite = ChronoUnit.DAYS.between(dateRetour,penalite);
-                    System.out.println("nb jours penalité : "+nbreJoursPenalite);
 
                     if(dateRetour.isAfter(penalite)){
                         statutFinal = LATE_DELIVERY;
+                        nbreJoursPenalite = ChronoUnit.DAYS.between(penalite,dateRetour);
+                        System.out.println("nb jours penalité : "+nbreJoursPenalite);
                     }else {
                         statutFinal =RETURNED;
                     }
@@ -148,6 +152,16 @@ public class PretRestController {
                 pret.setDateRetour(LocalDate.parse(dateL,DateTimeFormatter.ofPattern(formatDate)));
                 pret.setStatut(statutFinal);
                 data = pretDomain.save(pret);
+
+                if (data.getId()!=-1L && nbreJoursPenalite>0){
+
+                    Amende amende = Amende.builder()
+                            .pretId(data.getId())
+                            .coutParJour(500)
+                            .nombreJoursRetard(nbreJoursPenalite.intValue())
+                            .build();
+                    amendeDomain.save(amende);
+                }
 
             }
 
