@@ -94,8 +94,6 @@ public class PretRestController {
             Livre livre = optionalLivre.get();
             List<Pret> optPretActif = pretDomain.findAllByMembreIdAndLivreIdAndStatut(membre.getId(), livre.getId(),BORROW);
 
-            LocalDate dateM = membre.getDateMembership();
-
 
             if(!optPretActif.isEmpty()){
                 errors.put("pret","Vous avez déjà un prêt actif associé à cet livre");
@@ -108,7 +106,17 @@ public class PretRestController {
 
         if(errors.isEmpty()){
 
-            data = pretDomain.empruter(pretDTO);
+            Membre membre = optlMembre.get();
+            LocalDate dateM = membre.getDateMembership();
+            LocalDate datePre = LocalDate.parse(pretDTO.getDatePret(),DateTimeFormatter.ofPattern(dateP));
+
+            if(dateM.isAfter(datePre)){
+                errors.put("datePret","La date d'adhésion ne doit pas être supérieur à la date de prêt");
+            }
+
+            if(errors.isEmpty()){
+                data = pretDomain.empruter(pretDTO);
+            }
 
         }
 
