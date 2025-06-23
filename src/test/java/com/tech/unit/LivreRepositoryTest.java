@@ -1,5 +1,6 @@
 package com.tech.unit;
 
+import com.tech.BiblioDevApplication;
 import com.tech.domain.livre.entity.Livre;
 import com.tech.infrastructure.local.db.LivreRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 
@@ -15,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ContextConfiguration(classes = BiblioDevApplication.class)
 public class LivreRepositoryTest {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.tech.unit;
 
+import com.tech.BiblioDevApplication;
 import com.tech.domain.membre.entity.Membre;
 import com.tech.infrastructure.local.db.MembreRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @DataJpaTest
+@ContextConfiguration(classes = BiblioDevApplication.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MembreRepositoryTest {
 

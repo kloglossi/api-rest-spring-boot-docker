@@ -2,6 +2,7 @@ FROM postgres:14.7
 # Create a script to initialize the database and create the user
 COPY init_db.sh /docker-entrypoint-initdb.d/
 
+
 # Build Stage
 FROM maven:3.8.4-openjdk-17-slim AS build
 WORKDIR /app
@@ -10,7 +11,6 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 #-DskipTests
 #RUN mvn clean install
-
 
 
 # Runtime Stage

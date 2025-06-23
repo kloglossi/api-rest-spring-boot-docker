@@ -1,5 +1,6 @@
 package com.tech.unit;
 
+import com.tech.BiblioDevApplication;
 import com.tech.domain.livre.entity.Livre;
 import com.tech.domain.membre.entity.Membre;
 import com.tech.domain.pret.entity.Pret;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import static com.tech.domain.entity.StateData.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
+@ContextConfiguration(classes = BiblioDevApplication.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PretRepositoryTest {
 
