@@ -1,6 +1,10 @@
 package com.tech.domain.entity;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
@@ -9,13 +13,15 @@ import lombok.*;
 @Data()
 public class PageableDTO {
 
-    @Min(1)
-    int pageNo;
+    @NotNull(message = "pageNo ne doit pas être  nulle")
+    @Min(value = 1,message = "pageNo doit être supérieur à 0")
+    Integer pageNo;
 
-    @Min(1)
-    int itemsByPage;
+    @NotNull(message = "itemsByPage ne doit pas être  nulle")
+    @Min(value = 1,message = "itemsByPage doit être supérieur à 0")
+    Integer itemsByPage;
 
-    @NotEmpty
+    @NotEmpty(message = "Le champ sortDir est requis")
     String sortDir;
 
 }

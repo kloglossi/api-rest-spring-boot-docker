@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "a594595a-47a7-4168-94a0-855d75bafd27",
+		"name": "biblio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7362148"
+	},
+	"item": [
+		{
+			"name": "membre",
+			"item": [
+				{
+					"name": "liste membres",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pageNo\":\"2\",\n    \"itemsByPage\":\"5\",\n    \"sortDir\":\"ASC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/membres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"membres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "historique des prets d'un membre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pageNo\":\"1\",\n    \"itemsByPage\":\"5\",\n    \"sortDir\":\"ASC\",\n    \"sortField\":\"id\",\n    \"pageSize\":5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/membres/25/prets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"membres",
+								"25",
+								"prets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enregistrer membres",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\":\"cors\",\n    \"email\":\"ted12@gmail.com\",   \n    \"dateMembership\":\"2025-01-13\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/membres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"membres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifier membre",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"nom\":\"cors2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/membres/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"membres",
+								"25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pret",
+			"item": [
+				{
+					"name": "emprunt livre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"membreId\":\"25\",\n    \"livreId\":\"34\",\n    \"datePret\":\"2025-06-01\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/prets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"prets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prets actifs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/prets/actifs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"prets",
+								"actifs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prets en retard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/prets/en-retard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"prets",
+								"en-retard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retour emprunt",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"membreId\":\"25\",\n    \"livreId\":\"34\",\n    \"dateRetour\":\"2025-06-12\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/prets/16/retour",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"prets",
+								"16",
+								"retour"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "livre",
+			"item": [
+				{
+					"name": "enregistrer livre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auteur\":\"chat\",\n    \"titre\":\"bleu \",\n    \"isbn\":\"7253440348\",\n    \"disponible\": true,\n    \"categorie\":\"nature\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/livres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"livres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supprimer livre",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/livres/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"livres",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifier livre",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titre\":\"bleu noir\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/livres/33",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"livres",
+								"33"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rechercher livre (auteur, categorie, disponibilité)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auteur\":\"Coeur vibre\",\n    \"disponible\":\"false\",\n    \"categorie\":\"culture\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/livres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"livres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "récupérer livre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"auteur\":\"marc\",\n    \"disponible\":\"true\",\n    \"categorie\":\"science\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/livres/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"livres",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "système",
+			"item": [
+				{
+					"name": "actuator",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"dateRetour\":\"2025-06-01\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "statistiques",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"dateRetour\":\"2025-06-01\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/statistiques",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"statistiques"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

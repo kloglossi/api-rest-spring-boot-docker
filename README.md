@@ -1,7 +1,5 @@
 # Application Spring Boot avec PostgreSQL dockerisée
 
-## Getting Started
-
 Ces instructions vous permettront d'exécuter une copie du projet sur votre machine.
 
 ### Conditions préalables
