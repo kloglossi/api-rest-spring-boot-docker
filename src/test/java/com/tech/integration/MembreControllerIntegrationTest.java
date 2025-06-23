@@ -1,10 +1,12 @@
 package com.tech.integration;
 
+import com.tech.BiblioDevApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.tech.domain.entity.StateData.ENABLED;
@@ -15,10 +17,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = BiblioDevApplication.class)
 public class MembreControllerIntegrationTest {
 
     @Autowired
-    private MockMvc mockMvc; 
+    private MockMvc mockMvc;
 
     @Test
     public void testCreerMembre() throws Exception {
@@ -32,7 +35,7 @@ public class MembreControllerIntegrationTest {
         String dateMembership="2025-02-05";
 
         String membreJson = String.format("{\"nom\":\"%s\",\"email\":\"%s\"," +
-                "\"dateMembership\": \"%s\" ,\"statut\":\"%s\"}",nom,email,dateMembership, ENABLED);
+                "\"dateMembership\": \"%s\" ,\"statut\":\"%s\"}",nom,email,dateMembership, "ENABLED");
 
         mockMvc.perform(post("/api/membres")
                         .contentType(MediaType.APPLICATION_JSON)
