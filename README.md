@@ -31,6 +31,6 @@ Ces instructions vous permettront d'exécuter une copie du projet sur votre mach
     docker-compose up
     ```
     
-## L'application SpringBoot démarrera sur le port 8080
+## L'application springBoot démarrera sur le port 8080
 
 
