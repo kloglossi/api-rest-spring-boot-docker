@@ -1,8 +1,8 @@
-# Dockerized Spring boot application with PostgreSQL
+# Application Spring Boot avec PostgreSQL dockerisée
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development purposes. See running for notes on how to run the project on a system.
+Ces instructions vous permettront d'exécuter une copie du projet sur votre machine.
 
 ### Conditions préalables
 
@@ -24,20 +24,13 @@ These instructions will get you a copy of the project up and running on your loc
     https://docs.docker.com/install/linux/docker-ce/ubuntu/
     https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-debian-10
  
- 3. Installation et exécution :
+ 3. Installation et exécution du projet :
 
     ### Dans le repertoire de votre projet soit api-rest-spring-boot-docker taper dans le terminal la commande suivante: 
     ```
     docker-compose up
     ```
+    
+## L'application SpringBoot démarrera sur le port 8080
 
-* [Spring Boot](https://spring.io/projects/spring-boot) - Spring Boot 2
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [Docker](https://www.docker.com/) - For containerization of application
-* [PostgreSQL](https://www.postgresql.org/) - Database
 
-This project is licensed under the MIT License
-
-## Acknowledgments
-
-* Big thanks to Pivotal for Spring Boot framework, love it!
